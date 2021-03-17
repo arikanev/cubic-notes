@@ -5,6 +5,29 @@ v2 = [np.random.randint(-1,2) for i in range(3)]
 
 v = [v1, v2]
 
+
+def i2pv(N, p):
+
+    v = []
+
+    i = 0
+
+    while p**i < abs(N):
+
+        v.append(N % p**i)
+
+        i += 1
+
+
+    if len(v) == 0:
+
+        v.append(0)
+
+        return v
+
+    return v
+
+
 def addfr(v):
 
     if v[0][3] == v[1][3]:
