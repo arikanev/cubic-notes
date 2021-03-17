@@ -5,17 +5,65 @@ v2 = [np.random.randint(-1,2) for i in range(3)]
 
 v = [v1, v2]
 
-def padd_fr(v):
+def addfr(v):
 
-    
+    if v[0][3] == v[1][3]:
 
-def pinverse_fr(a, b, c, i):
+        return add([v[0][:-1], v[1][:-1]]), v[0][3]
 
-    a, b, c = inverse(a, b, c)
+    elif v[0][3] < v[1][3]:
 
-    return a, b, c, -i
+        return add([shift(*v[0][:-1], v[1][3] - v[0][3]), v[1][:-1]]), v[1][3]
 
-def pinverse(a, b, c):
+    elif v[0][3] > v[1][3]:
+
+        return add([shift(*v[1][:-1], v[0][3] - v[1][3]), v[0][:-1]]), v[0][3]
+
+
+def shiftfr(a, b, c, i, j):
+
+    if j == 0:
+
+        return a, b, c, i
+
+    elif j == 1:
+
+        return 0, a, b, j + i
+
+    elif j == 2:
+
+        return 0, 0, a, i + j
+
+    elif j == 3:
+
+        return 0, 0, 0, i + j
+
+
+def shift(a, b, c, j):
+
+    if j == 0:
+
+        return a, b, c
+
+    elif j == 1:
+
+        return 0, a, b
+
+    elif j == 2:
+
+        return 0, 0, a
+
+    elif j == 3:
+
+        return 0, 0, 0
+
+
+def inversefr(a, b, c, i):
+
+    return inverse(a, b, c), -i
+
+
+def inverse(a, b, c):
 
     if a == 0:
 
@@ -29,7 +77,7 @@ def pinverse(a, b, c):
 
         return normal(-1, -b, c + b**2)
 
-def pnormal(a, b, c):
+def normal(a, b, c):
 
     if abs(a) < 2:
 
@@ -48,7 +96,7 @@ def mod3(a):
     return -1 if a % 3 == 2 else a % 3
 
 
-def padd(v):
+def add(v):
 
     v3 = []
 
@@ -59,7 +107,7 @@ def padd(v):
     return normal(v3[0], v3[1], v3[2])
 
 
-def pmul(v):
+def mul(v):
 
     return [normal(mod3(v[0][0] * v[1][0]), mod3(v[0][0] * v[1][1] + v[0][1] * v[1][0]), mod3(v[0][0] * v[1][2] + v[0][1]*v[1][1] + v[0][2] * v[1][0]))]
 
